@@ -1,157 +1,163 @@
+/* --- Base Container --- */
 .landing-page {
-  background-color: black;
+  background-color: #0a0a0a; /* Deep elegant black */
+  
+  /* Subtle Moving Grid */
   background-image:
-    repeating-linear-gradient(45deg, rgba(0, 255, 196, 0.03) 0px, rgba(0, 255, 196, 0.03) 5px, transparent 5px, transparent 50px),
-    repeating-linear-gradient(-45deg, rgba(0, 255, 196, 0.03) 0px, rgba(0, 255, 196, 0.03) 5px, transparent 5px, transparent 50px);
-  background-size: 50px 50px, 50px 50px;
-  animation: movePattern 30s linear infinite;
+    repeating-linear-gradient(45deg, rgba(0, 255, 196, 0.03) 0px, rgba(0, 255, 196, 0.03) 1px, transparent 1px, transparent 50px),
+    repeating-linear-gradient(-45deg, rgba(0, 255, 196, 0.03) 0px, rgba(0, 255, 196, 0.03) 1px, transparent 1px, transparent 50px);
+  background-size: 70px 70px;
+  animation: movePattern 60s linear infinite;
+  
   color: #ffffff;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  text-align: center;
   cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   overflow: hidden;
   position: relative;
+  /* Modern Font Stack */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
 }
 
-.landing-page::before,
-.landing-page::after {
+/* --- Content Wrapper (Keeps text above background) --- */
+.content {
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  max-width: 90%;
+}
+
+/* --- Main Typography --- */
+.main-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  /* Fade In Animation */
+  opacity: 0;
+  animation: textFadeIn 1.5s ease-out forwards;
+  animation-delay: 0.3s;
+  
+  /* Elegant Gradient Text */
+  background: linear-gradient(to bottom right, #ffffff, #a5a5a5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- The "Tap to Enter" Prompt --- */
+.popup-message {
+  font-size: 0.9rem;
+  color: #00FFC4; /* Matrix Green Accent */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  
+  /* Hidden by default */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s ease;
+}
+
+.popup-message.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: pulse 2s infinite;
+}
+
+/* --- Background Ripples --- */
+.ripple-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let clicks pass through to container */
+  z-index: 1;
+}
+
+.ripple-bg::before,
+.ripple-bg::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70px;
-  height: 70px;
-  background-color: #00FFC4;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 255, 196, 0.2);
   border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
-  z-index: 0;
+  box-shadow: 0 0 15px rgba(0, 255, 196, 0.1);
 }
 
-.landing-page::before {
-  animation: dropletRipple 4s ease-out infinite;
+.ripple-bg::before {
+  width: 10px; height: 10px;
+  animation: rippleExpand 6s linear infinite;
 }
 
-.landing-page::after {
-  animation: dropletRipple 4s ease-out infinite 2s;
+.ripple-bg::after {
+  width: 10px; height: 10px;
+  animation: rippleExpand 6s linear infinite 3s; /* Delay for 2nd ripple */
 }
 
+/* =========================================
+   EXIT ANIMATION (The "Jump" Effect)
+   ========================================= */
 
-.landing-page h3 {
-  font-size: 2rem;
-  max-width: 90%;
-  padding: 20px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.5s;
-  z-index: 1;
-  position: relative;
-  margin-bottom: 20px;
- 
+.landing-page.exiting {
+  animation: warpJump 0.8s ease-in forwards;
+  pointer-events: none; /* Prevent double clicking */
 }
 
-.popup-message {
-  background-color: black;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  opacity: 0;
-  animation: popupFadeIn 500ms ease-out forwards, popupFadeOut 1s ease-in forwards;
-  animation-delay: 0s, 3s;
-  z-index: 9;
-  position: relative;
+/* The page expands towards the user and fades out */
+@keyframes warpJump {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4); /* Big Zoom */
+    filter: blur(10px); /* Speed blur effect */
+  }
 }
+
+/* Text shrinks slightly to create depth contrast */
+.landing-page.exiting .content {
+  transition: transform 0.8s ease-in;
+  transform: scale(0.8);
+}
+
+/* =========================================
+   OTHER ANIMATIONS 
+   ========================================= */
 
 @keyframes movePattern {
-  from {
-    background-position: 0 0, 0 0;
-  }
-
-  to {
-    background-position: 500px 500px, -500px 500px;
-  }
+  from { background-position: 0 0; }
+  to { background-position: 500px 500px; }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes textFadeIn {
+  from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-@keyframes dropletRipple {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(20);
-    opacity: 0;
-  }
+@keyframes rippleExpand {
+  0% { width: 0px; height: 0px; opacity: 0.8; border-width: 2px; }
+  100% { width: 1000px; height: 1000px; opacity: 0; border-width: 0px; }
 }
 
-@keyframes popupFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
-@keyframes popupFadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(90px);
-  }
-}
-
-
-
+/* --- Mobile Responsiveness --- */
 @media screen and (max-width: 768px) {
-
-
-  .landing-page h3{
-     
-  font-size: 1.3rem;
-  max-width: 100%;
-  padding: 10px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.5s;
-  z-index: 1;
-  position: relative;
-  margin-bottom: 20px;
- 
-  }
-
+  .main-text { font-size: 1.5rem; padding: 0 10px; }
+  .popup-message { font-size: 0.8rem; }
 }
