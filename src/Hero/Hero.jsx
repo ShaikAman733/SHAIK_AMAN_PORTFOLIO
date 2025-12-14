@@ -13,7 +13,6 @@ function Hero() {
             const offset = 80;
             const elementPosition = aboutSection.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.scrollY - offset;
-
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
