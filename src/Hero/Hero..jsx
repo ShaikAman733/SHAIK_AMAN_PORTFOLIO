@@ -1,5 +1,5 @@
 import React from 'react';
-import ChangingText from './changingText';
+import ChangingText from './changingtext';
 import './Hero.css';
 import profile from '/assets/profile.jpg';
 
