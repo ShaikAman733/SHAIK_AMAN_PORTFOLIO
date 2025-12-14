@@ -1,31 +1,51 @@
-import './Connect.css'; 
+import React from 'react';
+import './Connect.css';
+import { FaMapMarkerAlt, FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Contact = () => {
   return (
-        <section id='contact'>
-        <div className="contact-info-container ">
-          <h3>Find Me Here</h3>
-          <div className="contact-details">
-            <p className="contact-item">
-              <span className="icon">📍</span> Location: Hindupuram, Andhra Pradesh, India
-            </p>
-            <p className="contact-item">
-              <span className="icon">📧</span> Email: <a href="mailto:shaikaman2411@example.com">shaikaman2411@gmail.com</a>
-            </p>
-           
+    <section id="contact" className="contact-section">
+      <div className="contact-wrapper">
+        <h3 className="contact-heading">
+          <span className="hash">#</span> Get_In_Touch
+        </h3>
+        
+        <div className="contact-box">
+          <div className="info-line">
+            <span className="label">const location =</span>
+            <span className="value">"Banglore, Karnataka, India";</span>
           </div>
 
-          <div className="social-links">
-            <a href="https://www.linkedin.com/in/aman-shaik7" target="_blank" rel="noopener noreferrer" className="social-icon">
-             
-              <span className="icon">🔗</span> LinkedIn
+          <div className="info-line">
+            <span className="label">const email =</span>
+            <a href="mailto:shaikaman2411@gmail.com" className="value link">
+              "shaikaman2411@gmail.com";
             </a>
-            <a href="https://github.com/ShaikAman733" target="_blank" rel="noopener noreferrer" className="social-icon">
-              <span className="icon">🔗</span> GitHub
-            </a>
-            
+          </div>
+
+          <div className="social-line">
+            <span className="label">// Socials</span>
+            <div className="icons">
+              <a
+                href="https://www.linkedin.com/in/aman-shaik7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="https://github.com/ShaikAman733"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+              >
+                <FaGithub />
+              </a>
+            </div>
           </div>
         </div>
+      </div>
     </section>
   );
 };

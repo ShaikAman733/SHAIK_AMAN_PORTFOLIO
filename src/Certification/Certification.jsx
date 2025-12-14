@@ -1,5 +1,6 @@
-
+import React from 'react';
 import './Certification.css';
+import { FaAward, FaBuilding, FaCalendarAlt, FaFingerprint } from 'react-icons/fa';
 
 const certificationsData = [
   {
@@ -9,7 +10,7 @@ const certificationsData = [
     id: '19445443454'
   },
   {
-    title: ' Data	Analytics',
+    title: 'Data Analytics',
     issuer: 'Deloitte',
     date: 'May 2025',
     id: 'Jjk6Xx2TrZjufb8DW'
@@ -18,25 +19,36 @@ const certificationsData = [
 
 const Certifications = () => {
   return (
-    <div>
-      <h2 className='certify'>Certifications</h2>
-      <section id="certifications">
+    <section id="certifications" className="certifications-section">
+      <div className="section-header">
+        <h2 className="cert-heading">Certifications</h2>
+        <div className="underline"></div>
+      </div>
 
-        <div className="container">
-
-          <div className="certifications-grid">
-            {certificationsData.map((certification, index) => (
-              <div key={index} className="certification-card">
-                <h3>{certification.title}</h3>
-                <p className="issuer">{certification.issuer}</p>
-                <p className="date">{certification.date}</p>
-                <p className="id">ID: {certification.id}</p>
+      <div className="certifications-container">
+        {certificationsData.map((cert, index) => (
+          <div key={index} className="cert-card">
+            <div className="cert-icon-wrapper">
+              <FaAward className="main-icon" />
+            </div>
+            <div className="cert-content">
+              <h3>{cert.title}</h3>
+              <div className="cert-details">
+                <p className="issuer">
+                  <FaBuilding className="detail-icon" /> {cert.issuer}
+                </p>
+                <p className="date">
+                  <FaCalendarAlt className="detail-icon" /> {cert.date}
+                </p>
+                <p className="cert-id">
+                  <FaFingerprint className="detail-icon" /> ID: {cert.id}
+                </p>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

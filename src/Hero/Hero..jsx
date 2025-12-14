@@ -1,18 +1,18 @@
-import ChangingText from './changingtext';
+import React from 'react';
+import ChangingText from './ChangingText';
 import './Hero.css';
 import profile from '/assets/profile.jpg';
-import resume from '/assets/Shaik.Resume.pdf';
 
+// Updated Resume Link
+const RESUME_LINK = "https://drive.google.com/file/d/1bKa6PvGhMqPaeWKeUI1NR18Ud3Umt8Ka/view?usp=drive_link";
 
 function Hero() {
     const handleScrollToAbout = () => {
         const aboutSection = document.getElementById('about');
         if (aboutSection) {
             const offset = 80;
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = aboutSection.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - offset;
+            const elementPosition = aboutSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - offset;
 
             window.scrollTo({
                 top: offsetPosition,
@@ -22,26 +22,35 @@ function Hero() {
     };
 
     return (
-        <section id="Home">
-            <div className="heroSection">
-                <div className="box">
-                    <div className="content">
-                        <img className='developerimg' src={profile} alt="Shaik Aman" />
+        <section id="Home" className="hero-section">
+            <div className="hero-container">
+                <div className="profile-wrapper">
+                    <div className="profile-card">
+                        <div className="profile-content">
+                            <img className='profile-img' src={profile} alt="Shaik Aman" />
+                        </div>
                     </div>
                 </div>
-                <h1 className='author'>Shaik Aman</h1>
-                <div className='changingtext'><ChangingText /></div>
-                <p className='intro'>"Passionate about MERN, Python & data analysis."</p>
-                <div className='btns'>
-                    <button className='btn-more' onClick={handleScrollToAbout}>
-                        More About me
+
+                <h1 className='hero-title'>Shaik Aman</h1>
+                
+                <div className='hero-typewriter'>
+                    <ChangingText />
+                </div>
+                
+                <p className='hero-subtitle'>
+                    "Passionate about MERN, Python & data analysis."
+                </p>
+
+                <div className='hero-actions'>
+                    <button className='btn btn-primary' onClick={handleScrollToAbout}>
+                        More About Me
                     </button>
                     <button
-                        className="btn-more"
-                        onClick={() => window.open(resume, "_blank")}>
+                        className="btn btn-outline"
+                        onClick={() => window.open(RESUME_LINK, "_blank")}>
                         View Resume
                     </button>
-
                 </div>
             </div>
         </section>

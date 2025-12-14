@@ -1,42 +1,60 @@
 import React, { useState, useEffect } from 'react';
 
+const TEXTS = [
+    'Frontend Developer',
+    'MERN Stack Explorer',
+    'Data Science Student',
+    'Turning Ideas into Code'
+];
+
 const ChangingText = () => {
-    const texts = ['Frontend Developer','MERN Stack Explorer','Data Science Student','Turning Ideas into Code']
     const [displayText, setDisplayText] = useState('');
     const [index, setIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-        const currentText = texts[index];
-
-        let timeout;
+        const currentText = TEXTS[index];
+        let timer;
 
         if (!isDeleting && charIndex < currentText.length) {
-            timeout = setTimeout(() => {
-                setDisplayText(prev => prev + currentText.charAt(charIndex));
-                setCharIndex(charIndex + 1);
+            timer = setTimeout(() => {
+                setDisplayText(currentText.substring(0, charIndex + 1));
+                setCharIndex(prev => prev + 1);
             }, 100);
         } 
         else if (isDeleting && charIndex > 0) {
-            timeout = setTimeout(() => {
-                setDisplayText(prev => prev.slice(0, -1));
-                setCharIndex(charIndex - 1);
+            timer = setTimeout(() => {
+                setDisplayText(currentText.substring(0, charIndex - 1));
+                setCharIndex(prev => prev - 1);
             }, 50);
         } 
         else if (!isDeleting && charIndex === currentText.length) {
-            timeout = setTimeout(() => setIsDeleting(true), 1000);
+            timer = setTimeout(() => setIsDeleting(true), 1500);
         } 
         else if (isDeleting && charIndex === 0) {
             setIsDeleting(false);
-            setIndex((index + 1) % texts.length);
+            setIndex((prev) => (prev + 1) % TEXTS.length);
         }
 
-        return () => clearTimeout(timeout);
-    }, [charIndex, isDeleting, index, texts]);
+        return () => clearTimeout(timer);
+    }, [charIndex, isDeleting, index]);
 
     return (
-        <h1>{displayText}|</h1>
+        <span className="typing-text">
+            {displayText}
+            <span className="cursor">|</span>
+            <style jsx>{`
+                .cursor {
+                    animation: blink 1s step-end infinite;
+                    color: inherit;
+                }
+                @keyframes blink {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0; }
+                }
+            `}</style>
+        </span>
     );
 };
 

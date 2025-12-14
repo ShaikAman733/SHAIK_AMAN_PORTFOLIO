@@ -1,157 +1,155 @@
-body {
-    background-color: snow
+/* --- Variables for Dark Theme --- */
+:root {
+  --bg-black: #000000;
+  --text-white: #ffffff;
+  --text-gray: #b0b0b0;
+  --card-dark: #101114;
+  --accent: #00FFC4; 
 }
 
-#about {
-
-    justify-self: center;
-    display: flex;
-    background-color: snow;
-    font-family: "Mozilla Text", sans-serif;
-    padding-left: 40px;
-    padding-right: 40px;
-
+/* --- Section Layout --- */
+.about-section {
+  background-color: var(--bg-black);
+  padding: 100px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Optional: Border top to match other sections */
+  border-top: 1px solid #111; 
 }
 
-.container-about{
-    display: flex;
-    align-items: center;
-    max-width:600px ;
+.main-container {
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  gap: 4rem; 
 }
 
-.text {
-    margin-top: 40px;
-    font-size: 2rem;
-    margin-left: 30px;
-    margin-bottom: 0px;
-}
-
+/* --- Text Content --- */
 .about-content {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  flex: 1; 
+  text-align: left;
 }
 
-.about-text {
-    margin-top: 80px;
-    flex: 2;
-    text-align: justify;
-
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-white);
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  letter-spacing: -0.5px;
 }
 
-
-.shortintro {
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 25px;
-
+.section-title .underline {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 5px;
+  background-color: var(--accent);
+  margin-top: 10px;
+  border-radius: 2px;
 }
 
-
-.about-text p {
-    margin-bottom: 1rem;
+.about-description p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 1.5rem;
 }
 
-.about-stats {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    text-align: center;
-    margin-left: 100px;
-    margin-top: 100px;
-    align-items: center;
-    color: white;
+.about-description strong {
+  color: var(--text-white);
+  font-weight: 700;
+}
+
+/* --- Stats Grid --- */
+.stats-grid {
+  flex: 1; 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1.5rem;
 }
 
 .stat-card {
-    background-color: #101114;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    max-width: 200px;
-    max-height: 120px;
-  
+  background-color: var(--card-dark);
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Subtle border for dark theme definition */
+  border: 1px solid rgba(255, 255, 255, 0.08); 
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-color: var(--accent); 
 }
 
-.stat-card h3 {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
-
+.stat-value {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
 }
 
-.stat-card p {
-    font-size: 1rem;
-    font-weight: 500;
+.stat-label {
+  color: var(--text-white);
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0;
+  font-weight: 500;
 }
 
-@media (max-width: 768px) {
+/* --- Responsive Design (Mobile) --- */
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column; 
+    gap: 3rem;
+  }
 
-    #about {
-        width: 100vw;
-        display: grid;
-    }
+  .about-content {
+    text-align: center; 
+  }
 
-    .container-about {
-        max-width: 90vw;
-    }
+  .section-title .underline {
+    margin: 10px auto 0; 
+  }
 
-    .about-stats {
-        margin-left: 5px;
-        margin-right: 5px;
-        margin-top: 2rem;
-        justify-self: center;
-    }
+  .about-description p {
+    text-align: left; 
+    padding: 0 10px;
+  }
 
-    p.shortintro {
-        text-align: justify;
-        font-size: 10px;
-        min-width: 300px;
+  .stats-grid {
+    width: 100%;
+    max-width: 500px; 
+  }
+}
 
-    }
+@media (max-width: 480px) {
+  .about-section {
+    padding: 60px 20px;
+  }
 
+  .section-title {
+    font-size: 2rem;
+  }
 
-    .stat-card {
+  .stat-card {
+    padding: 1.5rem;
+  }
 
-        width: 6rem;
-        height: 5rem;
-        margin-bottom: 10px;
-        text-align: center;
-        border-radius: 6px;
+  .stat-value {
+    font-size: 2rem;
+  }
 
-
-
-    }
-
-    .stat-card h3 {
-        font-size: 20px;
-        margin-bottom: 2px;
-        align-self: center;
-        text-align: center;
-    
-
-
-    }
-
-    .stat-card p {
-        font-size: 10px;
-        align-self: baseline;
-    }
-
-    .text {
-        font-size: 25px;
-        margin-bottom: 0px;
-        margin-left: 20px;
-    }
-
-
-
+  .stat-label {
+    font-size: 0.8rem;
+  }
 }

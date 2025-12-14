@@ -1,68 +1,52 @@
-
-import './Skills.css'; 
-import slide  from '/assets/flick-to-left.png'
+import React from 'react';
+import './Skills.css';
 
 const skillsData = [
   {
     category: 'Frontend Development',
-    skills: [
-      'HTML5',
-      'CSS3',
-      'JavaScript (ES6+)',
-      'React.js',
-    ],
+    skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'React.js', 'Redux', 'Tailwind CSS'],
   },
   {
     category: 'Backend Development',
-    skills: [
-      'Python',
-      'MongoDB',
-    ],
+    skills: ['Python', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
   },
   {
-    category: 'Data Analytics ',
-    skills: [
-      'Power BI',
-      'Tableau',
-      'Excel',
-    ],
+    category: 'Data Analytics',
+    skills: ['Power BI', 'Tableau', 'Excel', 'Pandas', 'NumPy'],
   },
   {
     category: 'Soft Skills',
-    skills: [
-      'Team player',
-      'Bias for action',
-      'Deliver results',
-    ],
+    skills: ['Team Player', 'Problem Solving', 'Communication', 'Adaptability'],
   },
-
 ];
 
 const Skills = () => {
   return (
-    <>
-      <h2 className="skills-heading">Skills</h2>
-      <section id="Skills" className="skills-section">
-        <div className="skills-container">
-          {skillsData.map((skillCategory, index) => (
-            <div key={index} className="skills-category-card ">
-              <h3 className="category-title">{skillCategory.category}</h3>
-              <ul className="skill-list">
-                {skillCategory.skills.map((skill, skillIndex) => (
-                  <li key={skillIndex} className="skill-item">
-                    <span className="skill-icon"></span>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <section id="Skills" className="skills-section">
+      <div className="section-header">
+        <h2 className="skills-heading">Technical Skills</h2>
+        <div className="underline"></div>
+      </div>
 
-        </div>
-
-      </section>
-      <p className='slide'>  <img src= {slide} alt="slide" srcset="" /></p>
-    </>
+      <div className="skills-container">
+        {skillsData.map((category, index) => (
+          <div key={index} className="skills-card">
+            <h3 className="category-title">{category.category}</h3>
+            <ul className="skill-list">
+              {category.skills.map((skill, i) => (
+                <li key={i} className="skill-item">
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      
+      <div className="swipe-hint">
+        <span>Swipe for more &rarr;</span>
+      </div>
+    </section>
   );
 };
 
