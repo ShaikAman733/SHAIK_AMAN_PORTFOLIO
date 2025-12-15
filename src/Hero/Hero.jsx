@@ -49,7 +49,7 @@ function Hero() {
                 </div>
                 
                 <p className='hero-subtitle'>
-                    "Passionate about MERN, Python & data analysis."
+                    "Passionate about MERN & Python ."
                 </p>
 
                 {/* Social & Coding Profiles Section - RENDERED HERE FOR BOTH DESKTOP/MOBILE */}
