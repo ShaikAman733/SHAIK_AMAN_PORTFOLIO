@@ -22,7 +22,7 @@ function About() {
           
           <div className="about-description">
             <p>
-              I'm a passionate <strong>Data Science student</strong> at R.L. Jalappa Institute, 
+              I'm a passionate <strong>CSE Data Science student</strong> at R.L. Jalappa Institute, 
               affiliated with Visvesvaraya Technological University (VTU), Doddaballapur.
             </p>
             <p>
